@@ -10,7 +10,7 @@ Modeling Assumptions and Limitations:
 - **2×2 RVE** used for all homogenization (see paper for justification)
 - **Boundary conditions**: periodic displacement via image-source nodes
 
-The code was used to perform the simulations described in our preprint: [link], which describes a dataset of 1020 microstructures and their mechanical responses. That dataset is available here: [link].
+The code was used to perform the simulations described in our preprint: https://arxiv.org/abs/2507.11195, which describes a dataset of 1020 microstructures and their mechanical responses. That dataset is available here: https://zenodo.org/records/15849550.
 The Python code used to generate the new microstructure geometries is available in a repository on Github here: https://github.com/FHendriks11/wallpaper_microstructures.
 
 ### Support
