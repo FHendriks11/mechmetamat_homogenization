@@ -23,18 +23,17 @@ Martin Doškář, modified by Fleur Hendriks
 This repository by Martin Doškář and Fleur Hendriks is licensed under CC BY 4.0. See the license file here: https://creativecommons.org/licenses/by/4.0/ for more details.
 
 ### Citation
-If you use this code, please cite our preprint [link here] as follows:
+If you use this code, please cite our preprint https://arxiv.org/abs/2507.11195 as follows:
 
 ```bibtex
-@article{hendriks2025wallpaper,
-  author       = {Hendriks, Fleur and Menkovski, Vlado and Doškář, Martin and Geers, Marc and Rokoš, Ondřej},
-  title        = {Wallpaper Group-Based Mechanical Metamaterials: Dataset Including Mechanical Responses},
-  year         = {2025},
-  archivePrefix = {arXiv},
-  arxivID = {t.b.d.},
-  eprint = {t.b.d},
-  month = {jul},
-  url = {t.b.d}
+@misc{hendriks2025wallpapergroupbasedmechanicalmetamaterials,
+      title={Wallpaper Group-Based Mechanical Metamaterials: Dataset Including Mechanical Responses}, 
+      author={Fleur Hendriks and Vlado Menkovski and Martin Doškář and Marc G. D. Geers and Kevin Verbeek and Ondřej Rokoš},
+      year={2025},
+      eprint={2507.11195},
+      archivePrefix={arXiv},
+      primaryClass={cond-mat.soft},
+      url={https://arxiv.org/abs/2507.11195}, 
 }
 ```
 
