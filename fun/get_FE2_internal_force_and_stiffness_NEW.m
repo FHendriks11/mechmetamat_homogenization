@@ -9,8 +9,8 @@ function [Wmacro, Pmacro, Cmacro, currentState, storedT, bifurc, ...
 % Features: * Enable more iterations as a last-resort option before throwing too-short-time-step error
 %           * Supports mapping of prescribed U (OFF by DEFAULT)
 %
-% Version:  2025-07-03
-% Author:   Martin Doskar (MartinDoskar@gmail.com), modified by Fleur Hendriks
+% Version:  2025-07-28
+% Author:   Fleur Hendriks, Martin Doskar (MartinDoskar@gmail.com)
 
 
 %% Parse solver options and set defaults
@@ -243,7 +243,6 @@ while currentTime <= finalTime
                     fprintf('Trying perturbing the solution at time %f ...\n', currentTimeStep);
 
                     [eigVecs, eigVals, eigFlag] = eigs(Krenum, 16, 'smallestabs' );
-                    eigVals
 
                     % find desired value in eigVals (currently just
                     % smallest)
@@ -254,11 +253,11 @@ while currentTime <= finalTime
                     bifurcMode{iTime} = back_renumber_vector(perturbation, renumMap);
                     % max value of the perturbation is L/100
                     perturbation = perturbation / max(abs(perturbation)) * L/1000;
-                    fprintf('size(perturbation):');
-                    size(perturbation)
+                    % fprintf('size(perturbation):');
+                    % size(perturbation)
                     perturbation2 = back_renumber_vector(perturbation, renumMap);
-                    fprintf('size(perturbation2):');
-                    size(perturbation2)
+                    % fprintf('size(perturbation2):');
+                    % size(perturbation2)
 
 %                     % Optionally, plot perturbation:
 %                     plot_initial_and_final_configuration(RVEmesh, perturbation2);
@@ -278,10 +277,14 @@ while currentTime <= finalTime
                         Krenum = 0.5 * (Krenum + Krenum');
                         Rrenum = - FintRenum;
 
+                        % Switch to NewtonModified after perturbation and allow more iterations
+                        options.nIterLim = 200;
+                        options.solverOptions.direction = 'NewtonModified';
+
                         [uConverged, rConverged] = check_convergence(dw, w, Rrenum, currentTime, nIter, options);
                         if uConverged && rConverged
                             [~, Dtest, ~] = ldl(Krenum, 'vector');
-                            if any(diag(Dtest)<0)% || any(Dtest(Dtest~=0) < 0)
+                            if any(diag(Dtest)<0)
                                     warning('Perturbation did not result in stable solution, shortening time step\n');
                                 shortenTime = true;
                                 break
@@ -434,9 +437,9 @@ end
 [Wmacro_end, Ppseudo_end, Cpseudo_end] = upscale(RVEmesh4ORcode, materials, u, nExtDOFs, renumMapExt);
 [Pmacro_end, Cmacro_end] = currentTransformer.upscale(Ppseudo_end, Cpseudo_end);
 
-Wmacro_end
-Pmacro_end
-Cmacro_end
+% Wmacro_end
+% Pmacro_end
+% Cmacro_end
 
 lens = zeros(1, 7);
 lens(1) = size(Wmacro, 1);
